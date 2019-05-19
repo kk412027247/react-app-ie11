@@ -1,68 +1,49 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> React的脚手架`create-react-app`升级到了`3.0.1`之后，默认在`debug`模式下不支持`IE 11`，如果要支持`IE11`，需要引入第三方依赖包。
 
-## Available Scripts
+###  项目初始化
+```
+$ npx create-react-app my-app
+```
 
-In the project directory, you can run:
+### 兼容`IE11`
+1. 安装`core-js`
+  
+```
+$ cd my-app && yarn add core-js
+```
+2. 在项目入口引入`core-js`。
+```
+// index.js
 
-### `npm start`
+import 'core-js';
+import React from 'react';
+import ReactDOM from 'react-dom';
+...
+```
+4. 修改package.json，删除`development`，改成以下的样子
+```
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ]
+  }
+```
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 在虚拟机/window 子系统开发
+在这个环境下，更改文件，网页可能不会刷新。这是要在项目根目录新建`.env`文件，编辑内容。
+如果是在window下开发，请直接忽略这个设置。
+```
+//.env
+CHOKIDAR_USEPOLLING=true
+```
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+### 启动项目
+```
+$ yarn start
+```
+现在可以在IE11上运行了
 
-### `npm test`
+> 如果遇到项目还是无法在IE11上启动，请清除一下IE的缓存，或者删除`node_modules`文件夹，重新安装一次。
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
